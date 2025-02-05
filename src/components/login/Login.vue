@@ -7,6 +7,7 @@ export default {
       iin: '',
       focus: false,
       iin_error: false,
+      code_error: false,
       visible_pin: false,
       loading: false,
       loadingDone: false,
@@ -14,6 +15,14 @@ export default {
     };
   },
   methods: {
+    checkPin() {
+      const codeString = this.code.join('');
+     if(codeString != "1337") {
+      this.code_error = true;
+     } else {
+      this.$router.push({name: 'tickets'})
+     }
+    },
     onBlur() {
      if(this.iin.length <= 0) {
      this.focus = false;
@@ -21,13 +30,20 @@ export default {
     },
     moveFocus(index, event) {
       const inputValue = event.target.value;
+      const filteredInput = inputValue.replace(/[^0-9]/g, '');
+      this.code[index] = filteredInput;
+  
+      if (filteredInput !== inputValue) {
+         event.target.value = filteredInput;
+      }
       
+      if(this.code_error) this.code_error = false;
       
-      if (inputValue && index < this.code.length - 1) {
+      if (filteredInput && index < this.code.length - 1 ) {
         console.log('Next input:', index + 1);
         this.$refs[`input${index + 1}`].focus(); 
       } 
-      else if (!inputValue && index > 0) {
+      else if (!filteredInput && index > 0 ) {
         console.log('Previous input:', index - 1);
         this.$refs[`input${index - 1}`].focus(); 
       }
@@ -41,14 +57,17 @@ export default {
     axios.post(serverIp + "/login/checkiin").then(t => {
       localStorage.setItem("iin", iin);
       this.visible_pin = true;
+       this.loadingDone = true;
     }).catch(error => {
       this.iin_error = true;
       this.iin = "";
       this.focus = false;
+       this.loadingDone = true;
     });
     */
     this.loading = false;
-    this.visible_pin = true;
+    this.iin_error =  this.iin != "123456789012";
+    this.visible_pin = this.iin == "123456789012";
     this.loadingDone = true;
     setTimeout(() => {
           this.loadingDone = false;
@@ -74,7 +93,7 @@ export default {
       ">
         <p class="write_iin">{{loading ? "Минутку..." : (visible_pin ? "Введите PIN" : "Введите ИИН")}}</p>
         <p class="to_next">{{loading ? "Отправляем запрос" : "Чтобы продолжить" }}</p>
-        <input type="text" :class="{'iin_input_hide': visible_pin || loading}" v-model="iin" class="input_iin" name="iin" oninput="this.value=this.value.replace(/[^0-9]/g, '')" :maxlength="12"  @input="checkIin" @blur="onBlur"/>
+        <input type="numeric" :class="{'iin_input_hide': visible_pin || loading}" v-model="iin" class="input_iin" name="iin" oninput="this.value=this.value.replace(/[^0-9]/g, '')" :maxlength="12"  @input="checkIin" @blur="onBlur"/>
         <p :class="{
       'iin_input_text_focus': focus,
       'iin_input_text_blur': !focus,
@@ -84,7 +103,8 @@ export default {
 
 
        <div class="div-container">
-        <input 
+        <input
+        type="numeric"
       class="code_input" 
       :class="{'code_invisible': !visible_pin || loading}"  
       :maxlength="1" 
@@ -94,6 +114,7 @@ export default {
     />
     <input 
       class="code_input" 
+      type="numeric"
       :class="{'code_invisible': !visible_pin || loading}" 
       :maxlength="1" 
       v-model="code[1]" 
@@ -102,6 +123,7 @@ export default {
     />
     <input 
       class="code_input" 
+      type="numeric"
       :class="{'code_invisible_2': !visible_pin || loading}" 
       :maxlength="1" 
       v-model="code[2]" 
@@ -110,6 +132,7 @@ export default {
     />
     <input 
       class="code_input" 
+      type="numeric"
       :class="{'code_invisible_2': !visible_pin || loading}" 
       :maxlength="1" 
       v-model="code[3]" 
@@ -123,12 +146,12 @@ export default {
       <div v-if="loading" class="loading_3"></div>
       <div v-if="loading" class="loading_4"></div>
        
-      <button @click="checkIIN" :disabled="iin.length < 12" 
-      :class="{'button-active': iin.length === 12,
+      <button @click="!visible_pin ? checkIIN() : checkPin()" :disabled="(iin.length < 12 && !visible_pin) || (visible_pin && (code[0].length == 0 || code[1].length == 0 || code[2].length == 0 || code[3].length == 0))" 
+      :class="{'button-active': (iin.length >= 12 && !visible_pin) || (visible_pin && (code[0].length > 0 && code[1].length > 0 && code[2].length > 0 && code[3].length > 0)),
                'button-hide': loading,
                'button-visible': loadingDone,
       }
-      , {'error-color': iin_error}" class="next">{{iin_error ? "Неверный ИИН" : "Продолжить"}}</button>
+      , {'error-color': iin_error || code_error}" class="next">{{code_error ? "Неверный PIN" : iin_error ? "Неверный ИИН" : "Продолжить"}}</button>
      </div>
      
   </div>
