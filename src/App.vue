@@ -1,12 +1,12 @@
 <template>
-      <Background>
-            <div class="container_text">
-            <p class="char_k">K</p>
-            <p class="char_it">IT</p>
-            </div>
-        <p class="aitu">AITU</p>
-        <router-view></router-view>
-      </Background>
+  <Background>
+    <div class="container_text">
+      <p class="char_k">K</p>
+      <p class="char_it">IT</p>
+    </div>
+    <p class="aitu">AITU</p>
+    <router-view></router-view>
+  </Background>
   </template>
   
   <script>

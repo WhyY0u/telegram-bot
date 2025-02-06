@@ -9,6 +9,7 @@ export default {
       search,
       searching: false,
       issorting: false,
+      sorting_type: "",
       input_search: '',
     };
   },
@@ -26,14 +27,17 @@ export default {
   },
   SortingClick() {
     this.issorting = !this.issorting;
-    console.log("work")
+  },
+  OnClickSorting(name) {
+    this.sorting_type = name;
+    console.log(name)
   }
 },
 };
 </script>
 
 <template>
-    <div class="container_react">
+    <div class="container_react" :class="{'padding_bottom': issorting}">
         <input @click="SearchClick" @blur="SearchBlur" :class="{'full_search': searching,
                                                                 'small_search': issorting,
         }" class="react_1" @input="input_searchM"/>
@@ -52,6 +56,10 @@ export default {
         }" @click="SortingClick" >
             <img :src="sorting" :class="{'animation_hide_opacity_img': searching}" alt="sorting" class="sorting"/>
             <p class="sorting_text" :class="{'animation_hide_opacity': searching}">Sorting</p>
+            <div class="sorting_status">
+                <p class="status_text" :class="{'sorting_select': sorting_type == 'Status'}"  @click="OnClickSorting('Status')">Status</p>
+                <p class="status_text" :class="{'sorting_select': sorting_type == 'Type'}" @click="OnClickSorting('Type')">Type</p>
+            </div>
         </div>
         
 </div>
@@ -105,7 +113,7 @@ export default {
 @keyframes hideopacity_img {
      0% {
         opacity: 1;
-        transform: translate(-54px);
+        transform: translate(-57px);
      }
      100% {
         transform: translate(-42px);
@@ -120,16 +128,17 @@ export default {
         transform: translate(-42px);
      }
      100% {
-        transform: translate(-54px);
+        transform: translate(-57px);
         opacity: 1;
 
      }
 }
  .container_react {
-    position: absolute;
+    position: relative;
     width: 100%;
     height: 42px;
     top: 185px;
+    transition: height 0.5s ease;
 
  .react_1 {
     position: absolute;
@@ -156,6 +165,7 @@ export default {
     line-height: 17px;
     letter-spacing: 0px;
     
+    
  }
  .container_search {
     position: absolute;
@@ -164,6 +174,7 @@ export default {
     height: 42px;
     top: 0px;
     pointer-events: none;
+
     .search_text {
         position: relative;
         color: rgb(255, 255, 255);
@@ -174,15 +185,17 @@ export default {
         letter-spacing: 0px;
         text-align: center;
         opacity: 0.25;
-        top: 12px;
+        top: 13px;
         padding-left: 15px;
+
     }
+
     .search {
         position: absolute;
         top: 10px;
         left: 55%;
         user-select: none;
-        transform: translateX(-54px);
+        transform: translateX(-57px);
     }
 
  }
@@ -206,7 +219,33 @@ export default {
     height: 42px;
     top: 0px;
     cursor: pointer;
+    overflow: hidden;
     transition: width 0.5s, height 0.5s, border-radius 0.5s ease;
+
+    .status_text {
+            position: relative;
+            font-family: Inter;
+            color: rgb(201, 201, 201);
+            opacity: 0.2;
+            font-weight: 300;
+            font-size: 14px;
+            padding-top: 7px;
+            transition: font-size 0.25s ease
+        }
+
+        .sorting_select {
+            color: white;
+            font-size: 16px;
+            opacity: 0.4;
+        }
+
+    .sorting_status {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        top: 23px;
+        text-align: center;
+    }
     
 
 
@@ -217,10 +256,6 @@ export default {
         transform: translateX(-50px);
         pointer-events: none;
     }
-
-    
-
-     
 
     .sorting_text {
         position: relative;
@@ -262,13 +297,16 @@ export default {
         animation: backopacity 0.35s ease forwards;
     }
     .full_sortring {
-        height: 150px;
+        height: 105px;
         border-radius: 0px 20px 20px 20px;
     }
     .small_search {
          border-radius: 0px 0px 0px 20px;
-        
     }
   
 }
+.padding_bottom {
+    height: 95px;
+
+   }
 </style>

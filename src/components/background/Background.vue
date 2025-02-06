@@ -8,12 +8,14 @@
 <style scoped lang="scss">
 
 .background {
-    position: static;
+    position: fixed;
     width: 100vw;
     height: 100vh;
     background-image: url('../../assets/background.png');
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat;
+    z-index: -1;
+    
 }
 </style>
