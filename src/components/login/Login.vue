@@ -10,13 +10,44 @@ export default {
       code_error: false,
       visible_pin: false,
       loading: false,
+      isRegister: false,
+      input_one: false,
       loadingDone: false,
+      error_code_match: false,
       code: ['', '', '', ''],
+      oldCode: '',
     };
   },
   methods: {
     checkPin() {
       const codeString = this.code.join('');
+      if(this.isRegister && !this.input_one) {
+        this.input_one = true;
+        this.oldCode = codeString;
+        this.$refs[`input${0}`].value = '';
+        this.$refs[`input${1}`].value = '';
+        this.$refs[`input${2}`].value = '';
+        this.$refs[`input${3}`].value = '';
+        this.code = ['', '', '', ''];
+
+        return;
+      }
+
+      if(this.isRegister && this.input_one) {
+        if(this.oldCode != codeString) {
+        this.error_code_match = true;
+        this.input_one = false;
+        this.$refs[`input${0}`].value = '';
+        this.$refs[`input${1}`].value = '';
+        this.$refs[`input${2}`].value = '';
+        this.$refs[`input${3}`].value = '';
+        this.code = ['', '', '', ''];
+        return;
+        } else {
+          this.$router.push({name: 'tickets'})
+        }
+      }
+      
      if(codeString != "1337") {
       this.code_error = true;
      } else {
@@ -29,6 +60,8 @@ export default {
      }
     },
     moveFocus(index, event) {
+      this.error_code_match = false;
+
       const inputValue = event.target.value;
       const filteredInput = inputValue.replace(/[^0-9]/g, '');
       this.code[index] = filteredInput;
@@ -68,6 +101,8 @@ export default {
     this.loading = false;
     this.iin_error =  this.iin != "123456789012";
     this.visible_pin = this.iin == "123456789012";
+    this.isRegister = true;
+    this.input_one = false;
     this.loadingDone = true;
     setTimeout(() => {
           this.loadingDone = false;
@@ -79,7 +114,6 @@ export default {
       this.iin = this.iin.replace(/[^0-9]/g, ''); 
       this.focus = this.iin.length > 0;
       if(this.iin_error) this.iin_error = false;
-      console.log(this.iin.length)
     },
   },
 };
@@ -91,7 +125,7 @@ export default {
                                  'loading_done': loadingDone
      }
       ">
-        <p class="write_iin">{{loading ? "Минутку..." : (visible_pin ? "Введите PIN" : "Введите ИИН")}}</p>
+        <p class="write_iin">{{loading ? "Минутку..." : (visible_pin ? (isRegister ? (!input_one ? "Придумайте PIN" : "Подтвердите PIN") : "Введите PIN") : "Введите ИИН")}}</p>
         <p class="to_next">{{loading ? "Отправляем запрос" : "Чтобы продолжить" }}</p>
         <input type="numeric" :class="{'iin_input_hide': visible_pin || loading}" v-model="iin" class="input_iin" name="iin" oninput="this.value=this.value.replace(/[^0-9]/g, '')" :maxlength="12"  @input="checkIin" @blur="onBlur"/>
         <p :class="{
@@ -151,7 +185,7 @@ export default {
                'button-hide': loading,
                'button-visible': loadingDone,
       }
-      , {'error-color': iin_error || code_error}" class="next">{{code_error ? "Неверный PIN" : iin_error ? "Неверный ИИН" : "Продолжить"}}</button>
+      , {'error-color': iin_error || code_error || error_code_match}" class="next">{{error_code_match ? "PIN Не Совпадает" : code_error ? "Неверный PIN" : iin_error ? "Неверный ИИН" : "Продолжить"}}</button>
      </div>
      
   </div>

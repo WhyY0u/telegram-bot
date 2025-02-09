@@ -16,6 +16,9 @@
     background-position: center; 
     background-repeat: no-repeat;
     z-index: -1;
-    
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: auto; 
 }
 </style>

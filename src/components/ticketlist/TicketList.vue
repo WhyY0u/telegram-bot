@@ -108,10 +108,8 @@ mounted() {
 .scroll {
     position: absolute;
     width: 100%;
-    height: calc(100% - 220px);
-    overflow-y: scroll;
+    height: calc(100%);
     overflow-x: hidden;
-    scrollbar-width: none;
 }
 .scroll::-webkit-scrollbar {
     display: none;
