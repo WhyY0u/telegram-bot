@@ -137,7 +137,7 @@ export default {
     position: relative;
     width: 100%;
     height: 42px;
-    top: 185px;
+    top: 0px;
     transition: height 0.5s ease;
 
  .react_1 {

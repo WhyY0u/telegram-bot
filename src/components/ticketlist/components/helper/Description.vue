@@ -9,7 +9,7 @@
 <style>
  .background_desc {
     position: relative;
-    top: 180px;
+    top: 30px;
     left: 50%;
     width: 85%;
     height: auto;
@@ -18,7 +18,9 @@
     border-radius: 15px;
     backdrop-filter: blur(10px);
     background: rgba(0, 0, 0, 0.5);
-    padding-bottom: 15px;
+    padding-bottom: 55px;
+    margin-bottom: 55px;
+
     .text {
         color: rgba(255, 255, 255, 0.51);
         font-family: Inter;

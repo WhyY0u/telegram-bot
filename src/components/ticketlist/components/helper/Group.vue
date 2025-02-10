@@ -7,6 +7,9 @@ export default {
     text: {
       type: String,
       required: true,
+    },
+    hide: {
+      type: Boolean
     }
   },
 
@@ -20,9 +23,8 @@ export default {
 
 <style scoped>
 .group_background {
-    position: relative;
-    transform: translate(-92%);
-    left: 92%;
+    position: absolute;
+    right: 5%;
     box-sizing: border-box;
     border-bottom: 1px solid rgba(166, 129, 86, 0.2);
     border-left: 1px solid rgba(166, 129, 86, 0.2);
@@ -30,10 +32,10 @@ export default {
     border-radius: 0px 20px 0px 20px;
     backdrop-filter: blur(44px);
     background: rgba(0, 0, 0, 0.25);
-    top: 150px;
     height: 40px;
     width: 40%;
     overflow: hidden;
+    transition: opacity 0.5s, transform 0.5s ease;
 
     .text_group {
         color: rgba(255, 255, 255, 0.8);
@@ -58,11 +60,16 @@ export default {
     }
 
 }
+.hide_group {
+  transform: translateX(15px);
+  opacity: 0;
+  pointer-events: none;
+}
 </style>
 
 <template>
-   <div class="group_background">
+   <div class="group_background" :class="{'hide_group': hide}">
     <img class="group_type_image_size" :src="group" alt="Group Image"/>
-    <p class="text_group">ПО-263</p>
+    <p class="text_group">{{ text }}</p>
    </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div class="background_user">
+  <div class="background_user" :class="{'hide_user': hide}">
     <img class="image_user" :src="ComputedType"/>
     <p class="usertext">{{ text }}</p>
   </div>
@@ -18,10 +18,11 @@
     transform: translate(-50%);
     backdrop-filter: blur(44px);
     background: rgba(0, 0, 0, 0.25);
-    top: 160px;
     height: 45px;
     display: flex; 
+    margin-bottom: 10px;
     align-items: center; 
+    transition: transform 0.5s, opacity 0.5s ease;
   }
 
   .usertext {
@@ -42,6 +43,11 @@
     height: 25px;
     padding-left: 10px;
   }
+  .hide_user {
+    transform: translate(-50%, 15px);
+    opacity: 0;
+    pointer-events: none;
+  }
 </style>
 
 <script>
@@ -53,7 +59,10 @@ export default {
        text: {
         type: String,
         required: true
-       } 
+       },
+       hide: { 
+        type: Boolean
+       }
     },
     computed: {
     ComputedType() {

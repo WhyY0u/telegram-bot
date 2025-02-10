@@ -1,5 +1,5 @@
 <template>
-  <button :class="{'left': !right, 'right': right, 'color_red': color == 'red', 'color_green': color == 'green', 'position_right': right, 'position_left': !right}" @click="handleClick" class="button">{{ name }}</button>
+  <button :class="{'left': !right, 'right': right, 'color_red': color == 'red', 'color_green': color == 'green', 'position_right': right, 'position_left': !right, 'hide_right': hide && right, 'hide_left': hide && !right}" @click="handleClick" class="button">{{ name }}</button>
 </template>
 
 
@@ -20,6 +20,7 @@
     height: 45px;
     outline: none;
     cursor: pointer;
+    transition: opacity 0.5s, right 0.5s, left 0.5s ease;
 
  }
  .left {
@@ -35,13 +36,20 @@
     color: rgba(0, 255, 55, 0.51);
  }
  .position_left {
-    left: 11%;
-    transform: translate(-11%);
+    left: 7%;
+    transform: translate(-7%);
  }
  .position_right {
-   right: 6%;
-   transform: translate(-6%);
- 
+   right: 4%;
+   transform: translate(-4%);
+ }
+ .hide_left {
+    left: 5%;
+    opacity: 0;
+ }
+ .hide_right {
+   right: 2%;
+   opacity: 0;
  }
 
 </style>
@@ -64,6 +72,9 @@ export default {
           type: Function,
           default: () => {},
          },
+         hide: {
+            type: Boolean
+         }
     },
     methods: {
     handleClick() {

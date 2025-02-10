@@ -1,11 +1,13 @@
 <script>
 import Menu from './components/Menu.vue';
 import Card from './components/Сard.vue';
+import ButtonAdd from './components/helper/ButtonAdd.vue'
 export default {
     name: 'TicketList',
     components: {
         Menu,
         Card,
+        ButtonAdd,
     },
     data() {
     return {
@@ -65,9 +67,10 @@ mounted() {
 
 <template>
     <div class="container">
+      <div class="container_menu">
         <Menu/>
+      </div>
         <div class="container_card">
-            <div class="scroll">
                 <Card
           v-for="(card, index) in cards"
           :key="index"
@@ -79,37 +82,34 @@ mounted() {
           :description="card.description"
           :id="card.id"
         />
-    </div> 
 </div>
+<ButtonAdd/>
 </div>
 </template>
 
 <style>
 .container {
-    position: absolute;
+    position: relative;
     width: 100%;
     height: 100%;
     left: 0;
     top: 0;
-
 }
-
+.container_menu {
+  position: relative;
+  width: 100%;
+  height: 42px;
+  top: 80px;
+}
 .container_card {
     position: relative;
-    top: 200px;
+    top: 150px;
     width: 90%;
     max-width: 370px;
     min-width: 200px;
     height: 100%;
     left: 50%;
     transform: translateX(-50%);
-
-}
-.scroll {
-    position: absolute;
-    width: 100%;
-    height: calc(100%);
-    overflow-x: hidden;
 }
 .scroll::-webkit-scrollbar {
     display: none;

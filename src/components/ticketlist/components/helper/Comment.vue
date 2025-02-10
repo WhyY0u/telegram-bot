@@ -7,13 +7,14 @@
     backdrop-filter: blur(10px);
     background: rgba(0, 0, 0, 0.5);
     position: relative;
-    top: 200px;
+    top: 0px;
     left: 50%;
     width: 85%;
     height: auto;
     min-height: 130px;
     transform: translate(-50%);
     padding-bottom: 40px;
+    margin-bottom: 25px;
 
     .answer {
         position: relative;

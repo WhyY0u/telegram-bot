@@ -8,7 +8,7 @@
 <style>
   .header {
     position: relative;
-    top: 180px;
+    top: 70px;
     width: 90%;
     transform: translate(-50%);
     left: 50%;

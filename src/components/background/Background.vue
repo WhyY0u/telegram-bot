@@ -1,6 +1,8 @@
 <template>
   <div class="background">
+    <div class="content">
     <slot></slot>
+  </div>
   </div>
 
 </template>
@@ -10,7 +12,6 @@
 .background {
     position: fixed;
     width: 100vw;
-    height: 100vh;
     background-image: url('../../assets/background.png');
     background-size: cover; 
     background-position: center; 
@@ -19,6 +20,9 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-    overflow-y: auto; 
+}
+.content {
+  overflow-y: auto; 
+  height: 100%;
 }
 </style>

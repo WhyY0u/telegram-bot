@@ -48,7 +48,7 @@
     transform: translate(-50%);
     backdrop-filter: blur(44px);
     background: rgba(0, 0, 0, 0.25);
-    top: 160px;
+    top: 0px;
     height: 45px;
     display: flex; 
     align-items: center; 

@@ -1,6 +1,6 @@
 <template>
  <div class="container_selected_status" @click="onClick" :class="{'full': open}"> 
-   <p class="edit_status">Изменить Статус</p>
+   <p class="edit_status">{{ selected === '' ? 'Изменить Статус' : selected}}</p>
    <p :class="{'rotate_arrow': open}" class="arrow" >></p>
    <div class="open_box">
     <p 
@@ -32,6 +32,7 @@
     transition: height 0.5s ease;
     background: rgba(0, 0, 0, 0.5);
     overflow: hidden;
+    top: 15px;
 
     .edit_status {
         position: relative;
@@ -117,6 +118,7 @@ export default {
         },
         selectStatus(status) {
             this.selected = status;
+            this.$emit('set-status', status);
             this.$emit('update:selected', status);
             this.open = false;
         },
