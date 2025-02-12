@@ -208,6 +208,7 @@ export default {
     top: 48px;
     left: 15px;
     white-space: normal;
+    word-wrap: break-word;
     width: 290px;
   }
   .descript_container {

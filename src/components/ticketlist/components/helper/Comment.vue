@@ -15,6 +15,7 @@
     transform: translate(-50%);
     padding-bottom: 40px;
     margin-bottom: 25px;
+    overflow: hide;
 
     .answer {
         position: relative;
@@ -39,6 +40,7 @@
         letter-spacing: 0px;
         text-align: left;
         padding-right: 30px;
+        word-wrap: break-word;
     }
     .from {
         position: relative;

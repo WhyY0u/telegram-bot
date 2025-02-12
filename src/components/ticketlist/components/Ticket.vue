@@ -1,21 +1,21 @@
 <template>
 <div class="container">
-  <Header :text="ticket.heading"/>
+  <Header :text="ticket.header"/>
 <div class="container_middle">
   <Type :text="ticket.type"/>
   <Group :text="ticket.group"/>
 </div>
  <div class="container_two">
-  <User v-if="ticket.user_type == 'Admin'" :text="ticket.name"/>
-  <Status :status="ticket.status" v-if="ticket.user_type == 'User'"/>
+  <User v-if="ticket.usertype == 'Admin'" :text="ticket.userName"/>
+  <Status :status="ticket.status" v-if="ticket.usertype == 'User'"/>
  </div>
  <Description :text="ticket.description" />
-  <Comment v-if="ticket.comment != null && ticket.comment != undefined" :comment="'драствуйте уважаймая администрация у меня не работает душ уже 2 недели драствуйте уважаймая администрация у меня не работает душ уже 2 недели драствуйте уважаймая администрация у меня не работает душ уже 2 недели драствуйте уважаймая администрация у меня не работает душ уже 2 недели фото снизу показвает что у драствуйте уважаймая администрация у меня не работает душ уже 2 недели фото снизу показвает что у драствуйте уважаймая администрация у меня не работает душ уже 2 недели фото снизу показвает что у '" :from="ticket.from"/>
+  <Comment v-if="ticket.comment != null && ticket.comment != undefined" :comment="ticket.comment" :from="'Администрация'"/>
 <div class="container_three">
-  <Input v-if="ticket.user_type == 'Admin'" :error="error_comment" @set-error="error_comment = $event" @set-text="commentString = $event"/>
-  <SelectStatus v-if="ticket.user_type == 'Admin'" @set-status="status = $event"/>
+  <Input v-if="ticket.usertype == 'Admin'" :error="error_comment" @set-error="error_comment = $event" @set-text="commentString = $event"/>
+  <SelectStatus v-if="ticket.usertype == 'Admin'" @set-status="status = $event"/>
   <div class="container_four">
-    <Button :right="false" :color=" ticket.user_type == 'Admin' ? 'green' : 'red'" @click="ticket.user_type == 'Admin' ? onClickSave() : onClickDelete()" :name=" ticket.user_type == 'Admin' ? 'Сохранить' : 'Удалить'"/>
+    <Button :right="false" :color=" ticket.usertype == 'Admin' ? 'green' : 'red'" @click="ticket.usertype == 'Admin' ? onClickSave() : onClickDelete()" :name=" ticket.usertype == 'Admin' ? 'Сохранить' : 'Удалить'"/>
     <Button :right="true" :color="'red'" @click="onClickBack" :name="'Выход'"/>
 </div>
 </div>
@@ -72,6 +72,7 @@ import Comment from './helper/Comment.vue';
 import Button from './helper/Button.vue';
 import Input from './helper/Input.vue'
 import SelectStatus from './helper/SelectStatus.vue';
+import axios from 'axios';
 export default {
   name: 'Ticket',
   methods: {
@@ -79,15 +80,38 @@ export default {
       this.$router.push('/tickets');
     },
     onClickSave() {
-      console.log(this.status);
       if(this.commentString.length > 0 &&  this.commentString.length < 35) {
         this.error_comment = true;
         return;
       }
+      const serverIp = import.meta.env.VITE_SERVER_IP;
+      const requestBody = {
+          ticketId: this.ticket.id,
+          ...(this.status !== null && this.status.length > 0 && { status: this.status }),
+          ...(this.commentString !== null && this.commentString.length > 0 && { comment: this.commentString }),
+        };
+console.log(requestBody);
+
+      axios.post(serverIp + `/api/v2/ticket/update/ticket`, requestBody, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      }).then(r => {
+        this.$router.push('/tickets');
+      });
+
 
     },
     onClickDelete() {
-
+       const serverIp = import.meta.env.VITE_SERVER_IP;
+       const ticketId = this.$route.params.id; 
+      axios.delete(serverIp + `/api/v2/ticket/deleteTicket/${ticketId}`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      }).then(r => {
+        this.$router.push('/tickets');
+      });
     },
   },
   components: {
@@ -111,20 +135,29 @@ export default {
     status: {
       type: String,
     },
-    ticket: 
-      {
-        type: 'Жалоба',
-        user_type: 'User',
-        name: 'Древов Даниил Николаевич',
-        group: 'ПО-263',
-        heading: 'Проблема с душем',
-        status: 'Выполняется',
-        description: 'Здраствуйте уважаймая администрация, у меня не работает душ уже 2 недели. Фото снизу показывает, что у нас происходит повреждение в трубах.',
-        from: 'Жалпак Талгат Темиржанович',
-        comment: 'Здравствуйте, уважаемая администрация, у меня не работает душ уже 2 недели. Фото снизу показывает, что у нас происходит повреждение в трубах. Будьте добры, примите меры.',
-      }
+    ticket: []
     
   };
-}
+},
+mounted() {
+  const serverIp = import.meta.env.VITE_SERVER_IP;
+  const ticketId = this.$route.params.id; 
+      axios.get(serverIp + `/api/v2/ticket/get/` + ticketId, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      }).then(r => {
+        this.ticket = r.data;
+      }).catch(c => localStorage.removeItem('token'));
+
+      axios.post(serverIp + '/api/v2/ticket/check', {}, {
+        headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+     }).catch(e => {
+      this.$router.push({name: 'login'});
+      localStorage.removeItem('item')
+     })
+},
 }
 </script>

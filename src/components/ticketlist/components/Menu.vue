@@ -20,9 +20,9 @@ export default {
   SearchClick() {
     this.searching = true;
     this.issorting = false;
-
   },
   SearchBlur() {
+   this.$emit('set-search', this.input_search);
    this.searching = false
   },
   SortingClick() {
@@ -30,7 +30,9 @@ export default {
   },
   OnClickSorting(name) {
     this.sorting_type = name;
+    this.$emit('set-sorting', name);
     console.log(name)
+    
   }
 },
 };

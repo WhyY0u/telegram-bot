@@ -20,6 +20,7 @@ export default {
   },
   methods: {
     checkPin() {
+      const serverIp = import.meta.env.VITE_SERVER_IP;
       const codeString = this.code.join('');
       if(this.isRegister && !this.input_one) {
         this.input_one = true;
@@ -43,16 +44,32 @@ export default {
         this.$refs[`input${3}`].value = '';
         this.code = ['', '', '', ''];
         return;
-        } else {
-          this.$router.push({name: 'tickets'})
-        }
+        } 
       }
-      
-     if(codeString != "1337") {
-      this.code_error = true;
-     } else {
-      this.$router.push({name: 'tickets'})
-     }
+      if(this.isRegister) {
+        axios.post(serverIp + "/api/v2/auth/generateCode", {
+           iin: this.iin,
+           pin: codeString
+       }).then( t => {
+        localStorage.setItem('token', t.data.token);
+        this.$router.push({name: 'tickets'})
+       }).catch(e => this.code_error = true)
+      } else {
+        axios.post(serverIp + "/api/v2/auth/login/pin", {
+           iin: this.iin,
+           pinCode: codeString
+       }).then(t => {
+        localStorage.setItem('token', t.data.token);
+        this.$router.push({name: 'tickets'})
+       }).catch(e => {
+        this.$refs[`input${0}`].value = '';
+        this.$refs[`input${1}`].value = '';
+        this.$refs[`input${2}`].value = '';
+        this.$refs[`input${3}`].value = '';
+        this.code = ['', '', '', ''];
+        this.code_error = true;
+      })
+      }
     },
     onBlur() {
      if(this.iin.length <= 0) {
@@ -85,37 +102,49 @@ export default {
     checkIIN() {
   const serverIp = import.meta.env.VITE_SERVER_IP;
   this.loading = true;
-  setTimeout(() => {
-    /* 
-    axios.post(serverIp + "/login/checkiin").then(t => {
-      localStorage.setItem("iin", iin);
+   axios.post(serverIp + "/api/v2/auth/check/register", {
+   iin: this.iin
+  }).then(t => {
       this.visible_pin = true;
-       this.loadingDone = true;
+      this.loadingDone = true;
+      this.loading = false;
+      this.isRegister = t.data == "No";
+      if(this.isRegister)this.input_one = false;
+      this.loading = false;
+      setTimeout(() => {
+          this.loadingDone = false;
+        }, 2000);
     }).catch(error => {
       this.iin_error = true;
       this.iin = "";
       this.focus = false;
-       this.loadingDone = true;
-    });
-    */
-    this.loading = false;
-    this.iin_error =  this.iin != "123456789012";
-    this.visible_pin = this.iin == "123456789012";
-    this.isRegister = true;
-    this.input_one = false;
-    this.loadingDone = true;
-    setTimeout(() => {
+      this.loadingDone = true;
+      this.loading = false;
+      setTimeout(() => {
           this.loadingDone = false;
         }, 2000);
-  }, 2000);  
-}
-, 
+    });
+    this.isRegister = true;
+   
+
+},
     checkIin() {
       this.iin = this.iin.replace(/[^0-9]/g, ''); 
       this.focus = this.iin.length > 0;
       if(this.iin_error) this.iin_error = false;
     },
   },
+  mounted() {
+    const serverIp = import.meta.env.VITE_SERVER_IP;
+    axios.post(serverIp + '/api/v2/ticket/check', {}, {
+        headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+     }).then(response => {
+        console.log(response)
+        this.$router.push({name: 'tickets'})
+      }).catch(c => localStorage.removeItem('item'));
+  }
 };
 </script>
 
@@ -139,12 +168,12 @@ export default {
        <div class="div-container">
         <input
         type="numeric"
-      class="code_input" 
-      :class="{'code_invisible': !visible_pin || loading}"  
-      :maxlength="1" 
-      v-model="code[0]" 
-      @input="moveFocus(0, $event)"
-      ref="input0"
+        class="code_input" 
+        :class="{'code_invisible': !visible_pin || loading}"  
+        :maxlength="1" 
+        v-model="code[0]" 
+        @input="moveFocus(0, $event)"
+        ref="input0"
     />
     <input 
       class="code_input" 

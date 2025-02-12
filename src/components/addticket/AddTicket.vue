@@ -4,9 +4,9 @@
     <InputHeader :error="error_header" :hide="selectedType == ''" @set-error="error_header = $event" @set-text="headerString = $event"/>
    <div class="container_1">
     <Type :hide="selectedType == ''" :text="selectedType"/>
-    <Group :hide="selectedType == ''" :text="'CИБ-333'"/>
+    <Group :hide="selectedType == ''" :text="response.Group"/>
    </div>
-    <User :hide="selectedType == ''"  :text="'Древов Даниил Николаевич'"/>
+    <User :hide="selectedType == ''"  :text="response.Name"/>
     <Input :error="error_comment" :hide="selectedType == ''" @set-error="error_comment = $event" @set-text="descriptionString = $event"/>
 <div class="button_container">
     <Button :hide="selectedType == ''" :right="false" :color="'green'" :name="'Отправить'" @click="save"/>
@@ -44,6 +44,7 @@ import Group from '../ticketlist/components/helper/Group.vue';
 import User from '../ticketlist/components/helper/User.vue';
 import Input from '../ticketlist/components/helper/Input.vue';
 import Button from '../ticketlist/components/helper/Button.vue';
+import axios from 'axios';
 
 export default {
   name: 'AddTicket',
@@ -71,6 +72,16 @@ export default {
            this.error_comment = true;
            return;
         }
+      const serverIp = import.meta.env.VITE_SERVER_IP;
+      axios.post(serverIp + '/api/v2/ticket/createTicket', {
+        name: this.headerString,
+        type: this.selectedType == "Жалоба" ? "Complaint" : "Offer",
+        description: this.descriptionString
+      }, {
+        headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+     }).then(r => this.response = r.data)
         this.$router.push('/tickets');
     },
   },
@@ -81,13 +92,26 @@ export default {
       descriptionString: '',
       error_header: false,
       error_comment: false,
+      response: []
 
     }
   },
-  watch: {
-    selectedType(newVal, oldVal) {
-      console.log('selectedType изменился с', oldVal, 'на', newVal);
-    },
+  mounted() {
+    const serverIp = import.meta.env.VITE_SERVER_IP;
+    axios.post(serverIp + '/api/v2/ticket/info', {}, {
+        headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+     }).then(r => this.response = r.data)
+
+    axios.post(serverIp + '/api/v2/ticket/check', {}, {
+        headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+     }).catch(e => {
+      this.$router.push({name: 'login'});
+      localStorage.removeItem('item')
+     })
   }
 }
 </script>

@@ -37,7 +37,6 @@ export default {
   methods: {
     onClick(name) {
       this.localSelectedType = name; 
-      this.modelValue = name;
     },
   },
   watch: {
