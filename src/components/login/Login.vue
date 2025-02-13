@@ -141,9 +141,8 @@ export default {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
      }).then(response => {
-        console.log(response)
         this.$router.push({name: 'tickets'})
-      }).catch(c => localStorage.removeItem('item'));
+      }).catch(c => localStorage.removeItem('token'));
   }
 };
 </script>
