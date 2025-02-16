@@ -20,8 +20,8 @@
 .container_selected_status {
     position: relative;
     box-sizing: border-box;
-    border-left: 1px solid rgba(166, 129, 86, 0.2);
-    border-right: 1px solid rgba(166, 129, 86, 0.2);
+    border-left: 1px solid rgba(166, 129, 86, 0.4);
+    border-right: 1px solid rgba(166, 129, 86, 0.4);
     border-radius: 20px 0px 20px 20px;
     width: 90%;
     height: 50px;
@@ -36,7 +36,7 @@
 
     .edit_status {
         position: relative;
-        color: rgba(255, 255, 255, 0.51);
+        color: rgba(255, 255, 255, 1);
         font-family: Inter;
         font-size: 15px;
         font-weight: 300;
@@ -51,7 +51,7 @@
         position: absolute;
         left: 90%;
         transform: translate(-90%);
-        color: rgba(93, 93, 93, 0.39);
+        color: rgba(93, 93, 93, 1);
         font-family: Inter;
         font-size: 20px;
         font-weight: 300;
@@ -77,12 +77,12 @@
         font-family: Inter;
         font-size: 15px;
         padding-bottom: 15px;
-        color: rgba(255, 255, 255, 0.171);
+        color: rgba(255, 255, 255, 0.5);
         cursor: pointer;
         transition: color 0.3s, font-size 0.3s ease;
     }
     .selected {
-        color: rgba(255, 255, 255, 1);
+        color: rgba(166, 129, 86, 1);
         font-size: 17px;
     }
     .rotate_arrow {

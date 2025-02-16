@@ -6,7 +6,7 @@
 <style>
  .button {
     box-sizing: border-box;
-    border: 1px solid rgba(166, 129, 86, 0.2);
+    border: 1px solid rgba(166, 129, 86, 0.3);
     backdrop-filter: blur(44px);
     background: rgba(0, 0, 0, 0.5);
     font-family: Inter;
@@ -30,10 +30,10 @@
     border-radius: 0px 20px 20px 20px;
  }
  .color_red {
-    color: rgba(255, 0, 0, 0.51);
+    color: rgba(255, 0, 0, 1);
  }
  .color_green {
-    color: rgba(0, 255, 55, 0.51);
+    color: rgba(0, 255, 55, 1);
  }
  .position_left {
     left: 7%;

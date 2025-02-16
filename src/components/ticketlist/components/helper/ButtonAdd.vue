@@ -15,7 +15,7 @@
     backdrop-filter: blur(4px);
     border-radius: 30px;
     background: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(166, 129, 86, 0.2);
+    border: 1px solid rgba(166, 129, 86, 0.3);
     box-shadow: 0px 0px 10px rgba(166, 129, 86, 0.15);
     cursor: pointer;
 

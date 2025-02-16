@@ -59,9 +59,9 @@
     left: 50%;
     height: 100%;
     box-sizing: border-box;
-    border-bottom: 1px solid rgba(166, 129, 86, 0.2);
-    border-left: 1px solid rgba(166, 129, 86, 0.2);
-    border-top: 1px solid rgba(166, 129, 86, 0.2);
+    border-bottom: none;
+    border-left: none;
+    border-top: 1px solid rgba(166, 129, 86, 0.5);
     border-right: none;
     border-radius: 20px 20px 0px 0px;
     backdrop-filter: blur(44px);
@@ -84,7 +84,7 @@
     top: 12px;
     font-family: Inter;
     font-size: 16px;
-    color: rgba(255, 255, 255, 0.178);
+    color: rgba(255, 255, 255, 0.5);
     text-align: center;
     font-weight: 200;
     pointer-events: none;

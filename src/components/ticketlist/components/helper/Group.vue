@@ -26,9 +26,7 @@ export default {
     position: absolute;
     right: 5%;
     box-sizing: border-box;
-    border-bottom: 1px solid rgba(166, 129, 86, 0.2);
-    border-left: 1px solid rgba(166, 129, 86, 0.2);
-    border-top: 1px solid rgba(166, 129, 86, 0.2);
+    border-right: 1px solid rgba(166, 129, 86, 0.4);
     border-radius: 0px 20px 0px 20px;
     backdrop-filter: blur(44px);
     background: rgba(0, 0, 0, 0.25);
@@ -38,7 +36,7 @@ export default {
     transition: opacity 0.5s, transform 0.5s ease;
 
     .text_group {
-        color: rgba(255, 255, 255, 0.8);
+        color: rgba(255, 255, 255, 1);
         font-family: Inter;
         font-size: 13px;
         font-weight: 700;

@@ -336,7 +336,7 @@ export default {
         .to_next {
             position: relative;
             text-align: center;
-            color: rgba(255, 255, 255, 0.34);
+            color: rgba(255, 255, 255, 0.6);
             font-family: Inter;
             font-size: 14px;
             font-weight: 400;
@@ -347,7 +347,7 @@ export default {
         .input_iin {
             position: relative;
             box-sizing: border-box;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 10px;
             width: 90%;
             left: 5%;
@@ -377,7 +377,7 @@ export default {
           position: absolute;
           top: 100px;
           left: 30px;
-          color: rgba(255, 255, 255, 0.2);
+          color: rgba(255, 255, 255, 0.5);
           font-size: 16px;
         }
         .iin_input_text_focus {
@@ -391,7 +391,7 @@ export default {
             cursor: pointer;
             position: absolute;
             box-sizing: border-box;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 10px;
             background: rgba(0, 0, 0, 0.24);
             top: 175px;
@@ -402,11 +402,12 @@ export default {
             transform: translateX(-50%);
             color: rgb(255, 255, 255);
             font-family: Inter;
-            transition: background-color 0.5s, box-shadow 0.5s ease;
+            transition: background-color 0.5s, box-shadow 0.5s, border 0.5s ease;
             font-weight: 600;
         }
         .button-active {
             background-color: rgb(0, 69, 166);
+            border: 1px solid rgba(0, 69, 166, 1);
             box-shadow: 0px 0px 15px rgba(0, 69, 166, 1);
         }
         .button-hide {
@@ -487,7 +488,7 @@ export default {
           .code_input {
             position: relative;
             box-sizing: border-box;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 10px;
             backdrop-filter: blur(12px);
             background: rgba(0, 0, 0, 0.45);

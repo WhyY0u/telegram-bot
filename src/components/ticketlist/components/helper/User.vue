@@ -9,9 +9,7 @@
   .background_user {
     position: relative;
     box-sizing: border-box;
-    border-bottom: 1px solid rgba(166, 129, 86, 0.2);
-    border-left: 1px solid rgba(166, 129, 86, 0.2);
-    border-top: 1px solid rgba(166, 129, 86, 0.2);
+    border-bottom: 1px solid rgba(166, 129, 86, 0.4);
     border-radius: 0px 0px 20px 20px;
     width: 90%;
     left: 50%;

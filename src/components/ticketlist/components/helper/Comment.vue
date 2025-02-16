@@ -1,8 +1,8 @@
 <style>
  .background_comment {
     box-sizing: border-box;
-    border-left: 1px solid rgba(166, 129, 86, 0.2);
-    border-right: 1px solid rgba(166, 129, 86, 0.2);
+    border-left: 1px solid rgba(166, 129, 86, 0.3);
+    border-right: 1px solid rgba(166, 129, 86, 0.3);
     border-radius: 20px 0px 20px 20px;
     backdrop-filter: blur(10px);
     background: rgba(0, 0, 0, 0.5);

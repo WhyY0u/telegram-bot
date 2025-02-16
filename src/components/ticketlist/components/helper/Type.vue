@@ -9,11 +9,9 @@
 .type-ticket {
     position: relative;
     box-sizing: border-box;
-    border-bottom: 1px solid rgba(166, 129, 86, 0.2);
-    border-left: 1px solid rgba(166, 129, 86, 0.2);
-    border-top: 1px solid rgba(166, 129, 86, 0.2);
+    border-left: 1px solid rgba(166, 129, 86, 0.4);
     border-radius: 0px 20px 0px 20px;
-    backdrop-filter: blur(44px);
+    backdrop-filter: blur(10px);
     background: rgba(0, 0, 0, 0.25);
     left: 5%;
     height: 40px;

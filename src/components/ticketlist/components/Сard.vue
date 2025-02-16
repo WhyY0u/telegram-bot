@@ -177,9 +177,9 @@ export default {
       text-align: left;
      }
      .avtor_group {
-      color: rgba(166, 129, 86, 0.49);
+      color: rgba(166, 129, 86, 0.9);
       font-family: Inter;
-      font-size: 13.5px;
+      font-size: 12px;
       font-weight: 200;
       line-height: 16px;
       letter-spacing: 0px;
@@ -188,7 +188,7 @@ export default {
   }
     .heading {
       position: relative;
-      color: rgba(208, 208, 208, 0.68);
+      color: rgba(208, 208, 208, 1);
       font-family: Inter;
       font-size: 16px;
       font-weight: 700;
@@ -199,9 +199,9 @@ export default {
   }
   .description {
     position: relative;
-    color: rgba(255, 255, 255, 0.253);
+    color: rgba(255, 255, 255, 0.5);
     font-family: Inter;
-    font-size: 13.5px;
+    font-size: 13px;
     font-weight: 300;
     line-height: 17px;
     letter-spacing: 0px;
@@ -263,7 +263,7 @@ export default {
     line-height: 17px;
     letter-spacing: 0px;
     text-align: left;
-    opacity: 0.62;
+    opacity: 1.0;
   }
   .color_green {
     color: rgba(11, 255, 2, 1);

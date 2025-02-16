@@ -95,7 +95,7 @@ export default {
     }
 
     100% {
-        opacity: 0.25;
+        opacity: 1.0;
         transform: translate(0px);
     }
 }
@@ -145,13 +145,15 @@ export default {
  .react_1 {
     position: absolute;
     box-sizing: border-box;
-    border-bottom: 1px solid rgba(166, 129, 86, 0.2);
-    border-left: 1px solid rgba(166, 129, 86, 0.2);
-    border-top: 1px solid rgba(166, 129, 86, 0.2);
+    border-bottom: 1px solid rgba(166, 129, 86, 0.4);
+    border-left: 1px solid rgba(166, 129, 86, 0.4);
+    border-top: 1px solid rgba(166, 129, 86, 0.4);
+    backdrop-filter: blur(8px);
+    background: rgba(17, 17, 17, 0.2);
     border-right: none;
     border-radius: 0px 0px 0px 20px;
     backdrop-filter: blur(12px);
-    background: rgba(0, 0, 0, 0.25);
+    
     width: 45%;
     left: 5%;
     height: 42px;
@@ -159,7 +161,7 @@ export default {
     cursor: pointer;
     transition: width 0.5s, border-radius 0.5s ease;
     outline:none ;
-    color: rgb(255, 255, 255, 0.4);
+    color: rgb(255, 255, 255, 0.8);
     font-family: Inter;
     font-size: 15px;
     font-weight: 500;
@@ -186,7 +188,7 @@ export default {
         line-height: 17px;
         letter-spacing: 0px;
         text-align: center;
-        opacity: 0.25;
+        opacity: 1.0;
         top: 13px;
         padding-left: 15px;
 
@@ -206,16 +208,16 @@ export default {
  .full_search {
         width: 90%;
         border-radius: 0px 0px 20px 20px;
-        border-right: 1px solid rgba(166, 129, 86, 0.2);;
+        border-right: 1px solid rgba(166, 129, 86, 0.5);
     }
 
  .react_2 {
     position: absolute;
     box-sizing: border-box;
-    border: 1px solid rgba(166, 129, 86, 0.2);
     border-radius: 0px 20px 0px 0px;
-    backdrop-filter: blur(44px);
-    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(166, 129, 86, 0.4);
+    background: rgba(17, 17, 17, 0.2);
     width: 45%;
     right: 5%;
     height: 42px;
@@ -228,7 +230,7 @@ export default {
             position: relative;
             font-family: Inter;
             color: rgb(201, 201, 201);
-            opacity: 0.2;
+            opacity: 0.7;
             font-weight: 300;
             font-size: 14px;
             padding-top: 7px;
@@ -238,7 +240,8 @@ export default {
         .sorting_select {
             color: white;
             font-size: 16px;
-            opacity: 0.4;
+            opacity: 1.0;
+            color: rgba(166, 129, 86, 1.0)
         }
 
     .sorting_status {
@@ -268,7 +271,7 @@ export default {
         line-height: 17px;
         letter-spacing: 0px;
         text-align: center;
-        opacity: 0.25;
+        opacity: 1.0;
         top: 12px;
         padding-left: 15px;
         user-select: none;

@@ -16,15 +16,15 @@
 
     .input {
         box-sizing: border-box;
-        border-left: 1px solid rgba(166, 129, 86, 0.2);
-        border-right: 1px solid rgba(166, 129, 86, 0.2);
+        border-left: 1px solid rgba(166, 129, 86, 0.4);
+        border-right: 1px solid rgba(166, 129, 86, 0.4);
         border-top:  none;
         border-bottom:  none;
         border-radius: 0px 20px 20px 20px;
         backdrop-filter: blur(10px);
         background: rgba(0, 0, 0, 0.5);
         outline: none;
-        color: rgba(255, 255, 255, 0.51);
+        color: rgba(255, 255, 255, 1);
         font-family: Inter;
         font-size: 15px;
         font-weight: 300;
@@ -40,7 +40,7 @@
     }
     .text_input {
         position: absolute;
-        color: rgba(255, 255, 255, 0.11);
+        color: rgba(255, 255, 255, 0.5);
         font-family: Inter;
         font-size: 15px;
         font-weight: 300;

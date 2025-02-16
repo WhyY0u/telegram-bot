@@ -94,7 +94,7 @@ export default {
         .header_select {
           position: relative;
           font-family: Inter;
-          font-size: 18px;
+          font-size: 15px;
           text-align: center;
           top: 25px;
           color: rgb(255, 255, 255);
@@ -108,7 +108,7 @@ export default {
             top: 40px;
             font-family: Inter;
             font-size: 15px;
-            color: rgba(255, 255, 255, 0.24);
+            color: rgba(255, 255, 255, 0.7);
             text-align: center;
         }
         .image {

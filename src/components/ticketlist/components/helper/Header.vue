@@ -14,11 +14,9 @@
     left: 50%;
     height: 45px;
     box-sizing: border-box;
-    border-bottom: 1px solid rgba(166, 129, 86, 0.2);
-    border-left: 1px solid rgba(166, 129, 86, 0.2);
-    border-top: 1px solid rgba(166, 129, 86, 0.2);
+    border-top: 1px solid rgba(166, 129, 86, 0.4);
     border-radius: 20px 20px 0px 0px;
-    backdrop-filter: blur(44px);
+    backdrop-filter: blur(10px);
     background: rgba(0, 0, 0, 0.25);
     overflow: hidden;
 

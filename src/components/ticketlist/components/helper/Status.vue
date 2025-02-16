@@ -39,14 +39,12 @@
   .background_status {
     position: relative;
     box-sizing: border-box;
-    border-bottom: 1px solid rgba(166, 129, 86, 0.2);
-    border-left: 1px solid rgba(166, 129, 86, 0.2);
-    border-top: 1px solid rgba(166, 129, 86, 0.2);
+    border-bottom: 1px solid rgba(166, 129, 86, 0.4);
     border-radius: 0px 0px 20px 20px;
     width: 90%;
     left: 50%;
     transform: translate(-50%);
-    backdrop-filter: blur(44px);
+    backdrop-filter: blur(10px);
     background: rgba(0, 0, 0, 0.25);
     top: 0px;
     height: 45px;
@@ -72,16 +70,16 @@
     padding-left: 10px;
     }
     .color_red {
-        color: rgba(255, 0, 0, 0.98);
+        color: rgba(255, 0, 0, 1);
     }
     .color_green {
         color: rgb(11, 255, 2);
     }
     .color_blue {
-        color: rgba(2, 142, 255, 0.98);
+        color: rgba(2, 142, 255, 1);
     }
     .color_orange {
-        color: rgba(166, 129, 86, 0.63);
+        color: rgba(166, 129, 86, 1);
     }
   }
 </style>

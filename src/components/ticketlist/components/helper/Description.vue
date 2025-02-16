@@ -22,7 +22,7 @@
     margin-bottom: 55px;
 
     .text {
-        color: rgba(255, 255, 255, 0.51);
+        color: rgba(255, 255, 255, 1);
         font-family: Inter;
         font-size: 15px;
         font-weight: 300;
